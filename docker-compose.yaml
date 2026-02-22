@@ -1,0 +1,49 @@
+services:
+  openobserve:
+    image: public.ecr.aws/zinclabs/openobserve:latest
+    container_name: openobserve
+    ports:
+      - "5080:5080"
+    environment:
+      - ZO_ROOT_USER_EMAIL=root@example.com
+      - ZO_ROOT_USER_PASSWORD=ComplexPassword123!
+    volumes:
+      - openobserve_data:/data
+
+  apache:
+      image: httpd:latest
+      container_name: apache
+      ports:
+        - "8080:80"
+      volumes:
+        - apache_logs:/usr/local/apache2/logs
+      command: >
+        /bin/sh -c "
+        sed -i 's|ErrorLog .*|ErrorLog /usr/local/apache2/logs/error.log|' conf/httpd.conf &&
+        sed -i 's|CustomLog .*|CustomLog /usr/local/apache2/logs/access.log common|' conf/httpd.conf &&
+        httpd-foreground"
+
+  golang-app:
+    build: ./golang-app
+    container_name: golang-app
+    volumes:
+      - app_logs:/var/log/app
+
+  fluent-bit:
+    image: cr.fluentbit.io/fluent/fluent-bit:latest
+    container_name: fluent-bit
+    user: root 
+    volumes:
+      - ./fluent-bit/fluent-bit.conf:/fluent-bit/etc/fluent-bit.conf
+      - ./fluent-bit/parsers.conf:/fluent-bit/etc/parsers.conf
+      - apache_logs:/var/log/apache
+      - app_logs:/var/log/app
+    depends_on:
+      - openobserve
+      - apache
+      - golang-app
+
+volumes:
+  openobserve_data:
+  apache_logs:
+  app_logs:
