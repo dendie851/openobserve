@@ -2,7 +2,7 @@
 
 Have you ever wondered what happens inside a computer program when it's running? Or how engineers find out why a website crashed? Welcome to the world of **Observability**!
 
-
+Connecting Fluent Bit and OpenObserve you no longer need to log into each VM or Container individually via terminal, just to find the cause of an error. You simply need to open a single Dashboard to monitor system in real-time 
 
 ## 📖 Table of Contents
 1. [The Story: Why do we need logs?](#1-the-story-why-do-we-need-logs)
