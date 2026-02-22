@@ -86,30 +86,33 @@ Here is how everything is connected:
 
 We use **Docker Compose** to start everything at once. It's like pressing one "START" button for a whole factory.
 
-### 1. Starting the Factory
+### 7.1. Starting the Factory
 When you run the command, you will see all the containers starting up:
 ![Docker Compose Up](ss/1-docker-compose-up.png)
 
-### 2. The Delivery Guy at Work
+### 7.2. The Delivery Guy at Work
 Fluent Bit starts collecting logs from Apache (Web Server) and our Go App:
 ![Fluent Bit Stats](ss/2-fluentbit.png)
 
-### 3. Entering the Library
+### 7.3. Entering the Library
 This is the OpenObserve Home Screen. It's clean and ready for us:
 ![OpenObserve Home](ss/3-open-observe-home.png)
 
-### 4. Searching the Diaries
+### 7.4. Searching the Diaries
 Inside the dashboard, we can see how many logs we have:
 ![OpenObserve Dashboard](ss/4-open-observe-dashboard.png)
 
-### 5. Seeing the Go App Logs
+### 7.5. Seeing the Go App Logs
 Our "Go-App" is sending heartbeats every few seconds. We can see them here:
 ![Go App Logs](ss/6-open-observe-logs-apps-golang.png)
 
-### 6. Seeing the Web Server Logs
-Even the Apache web server logs are visible!
+### 7.6. Seeing the Web Server Logs
+Setting rettention data 
 ![Apache Logs](ss/7-open-observe-logs-web-server-apache.png)
 
+### 7.7. Data Retention
+Even the Apache web server logs are visible!
+![Apache Logs](ss/8-open-observe-data-retention.png)
 
 
 ## 8. Default Login
